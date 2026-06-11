@@ -1,10 +1,13 @@
 public class ResponseFactory
 {
+    private static int SuccessCode = 200;
+    private static int ErrorCode = 500;
+
     public static ResponseBase<T> CreateSuccessResponse<T>(T data, string message = "Success")
     {
         return new ResponseBase<T>
         {
-            Code = 200,
+            Code = SuccessCode,
             Message = message,
             Data = data
         };
@@ -14,7 +17,7 @@ public class ResponseFactory
     {
         return new ResponseBase<T>
         {
-            Code = 500,
+            Code = ErrorCode,
             Message = message,
             Data = data
         };
@@ -24,7 +27,7 @@ public class ResponseFactory
     {
         return new ResponseBase
         {
-            Code = 200,
+            Code = SuccessCode,
             Message = message
         };
     }
@@ -33,7 +36,7 @@ public class ResponseFactory
     {
         return new ResponseBase
         {
-            Code = 500,
+            Code = ErrorCode,
             Message = message
         };
     }
