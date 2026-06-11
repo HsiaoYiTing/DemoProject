@@ -1,6 +1,9 @@
 <script setup lang="ts">
+import { error } from 'console';
+
 
 const text = defineModel<string | number | null>()
+const emit = defineEmits(['onBlur'])
 
 defineProps<{
     title: string,
@@ -9,16 +12,22 @@ defineProps<{
     errorText: string
 }>()
 
+const onBlur = () => {
+    emit('onBlur')
+}
+
 </script>
 
 <template>
   <div>
     <p class="title">{{ title }}</p>
-    <input class="editView" 
+    <input 
+        @blur="onBlur"
+        class="editView" 
         v-model="text" 
         :placeholder="hint"
         :type="type"
-         />
+    />
     <p class="errorTxt" v-show="errorText.length > 0">{{errorText}}</p>
 
   </div>

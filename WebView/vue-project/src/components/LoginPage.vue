@@ -15,8 +15,6 @@ const passwordError= ref('')
 
 const submitAction = () => {
 
-  accountError.value = account.value.length == 0 ? "帳號不能為空" : ""
-  passwordError.value = password.value.length == 0 ? "密碼不能為空" : ""
     
   if (accountError.value.length > 0 || passwordError.value.length > 0) {
     return
@@ -30,6 +28,17 @@ const submitAction = () => {
   }
 }
 
+const accountValidate = () => {
+
+    accountError.value = account.value.length == 0 ? "帳號不能為空" : ""
+}
+
+const passwordValidate = () => {
+
+  passwordError.value = password.value.length == 0 ? "密碼不能為空" : ""
+}
+
+
 </script>
 
 <template >
@@ -42,10 +51,12 @@ const submitAction = () => {
     
     <BaseEditView 
       v-model="account" 
+      @onBlur="accountValidate"
       title="帳號" hint="請輸入帳號" type="text" :error-text="accountError" />
     
     <BaseEditView 
       v-model="password"
+      @onBlur="passwordValidate"
       title="密碼" hint="請輸入密碼" type="password" :error-text="passwordError" />
 
     <button class="login_button" @click="submitAction">登入</button>

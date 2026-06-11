@@ -22,8 +22,6 @@ const message = ref('')
 
 const submitAction = () => {
 
-  accountError.value = account.value.length == 0 ? "帳號不能為空" : ""
-  nameError.value = name.value.length == 0 ? "姓名不能為空" : ""
     
   if (accountError.value.length > 0 || nameError.value.length > 0) {
     return
@@ -47,6 +45,14 @@ const addUserApi = async () => {
 
 }
 
+const accountValidate = () => {
+  accountError.value = account.value.length == 0 ? "帳號不能為空" : ""
+}
+
+const nameValidate = () => {
+  nameError.value = name.value.length == 0 ? "姓名不能為空" : ""
+}
+
 </script>
 
 <template >
@@ -59,10 +65,12 @@ const addUserApi = async () => {
     
     <BaseEditView 
       v-model="account" 
+      @onBlur="accountValidate"
       title="帳號" hint="請輸入帳號" type="text" :error-text="accountError" />
     
     <BaseEditView 
       v-model="name"
+      @onBlur="nameValidate"
       title="姓名" hint="請輸入姓名" type="text" :error-text="nameError" />
 
     <BaseEditView 
