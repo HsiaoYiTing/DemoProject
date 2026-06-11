@@ -32,15 +32,63 @@ public class UserService
         return ResponseFactory.CreateSuccessResponse<List<User>>(userList, "Users retrieved successfully.");
     }
 
-    public async Task<ResponseBase> AddUserAsync(User user)
+    public async Task<ResponseBase> AddUserAsync(UserRequest request)
     {
+        if (request.Age <= 0)
+        {
+           return ResponseFactory.CreateErrorResponse("age cannot <= 0");
+        } 
+        if (request.Name.Length > 100)
+        {
+           return ResponseFactory.CreateErrorResponse("Name.Length cannot > 100");
+        }
+        if (request.Account.Length > 50)
+        {
+           return ResponseFactory.CreateErrorResponse("Account.Length cannot > 50");
+        }
+
+
+        User user = new User
+        {
+            Account = request.Account,
+            Name = request.Name,
+            Age = request.Age,
+            Salary = request.Salary,
+            Enabled = request.Enabled,
+            Birthday = request.Birthday,
+        };
+
         var result = await _userRepository.AddAsync(user);
         
         return ResponseFactory.CreateSuccessResponse(result > 0 ? "User added successfully." : "Failed to add user.");
     }
 
-    public async Task<ResponseBase> UpdateUserAsync(User user)
+    public async Task<ResponseBase> UpdateUserAsync(UserRequest request)
     {
+        if (request.Age <= 0)
+        {
+           return ResponseFactory.CreateErrorResponse("age cannot <= 0");
+        } 
+        if (request.Name.Length > 100)
+        {
+           return ResponseFactory.CreateErrorResponse("Name.Length cannot > 100");
+        }
+        if (request.Account.Length > 50)
+        {
+           return ResponseFactory.CreateErrorResponse("Account.Length cannot > 50");
+        }
+
+        User user = new User
+        {
+            Id = request.Id,
+            Account = request.Account,
+            Name = request.Name,
+            Age = request.Age,
+            Salary = request.Salary,
+            Enabled = request.Enabled,
+            Birthday = request.Birthday,
+        };
+    
         var result = await _userRepository.UpdateAsync(user);
 
         return ResponseFactory.CreateSuccessResponse(result > 0 ? "User updated successfully." : "Failed to update user.");

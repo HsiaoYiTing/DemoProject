@@ -45,19 +45,7 @@ public class UsersController : ControllerBase
     [HttpPost("add")]
     public async Task<IActionResult> AddAsync([FromBody] UserRequest request)
     {
-        User user = new User
-        {
-            Account = request.Account,
-            Name = request.Name,
-            Age = request.Age,
-            Salary = request.Salary,
-            Enabled = request.Enabled,
-            Birthday = request.Birthday,
-        };
-
-        _logger.LogInformation("Adding user: {@User}", JsonSerializer.Serialize(user));
-    
-        await _userService.AddUserAsync(user);
+        await _userService.AddUserAsync(request);
 
         return Ok(new { message = "User added successfully" });
     }
@@ -65,18 +53,7 @@ public class UsersController : ControllerBase
     [HttpPost("update")]
     public async Task<IActionResult> UpdateAsync([FromBody] UserRequest request)
     {
-        User user = new User
-        {
-            Id = request.Id,
-            Account = request.Account,
-            Name = request.Name,
-            Age = request.Age,
-            Salary = request.Salary,
-            Enabled = request.Enabled,
-            Birthday = request.Birthday,
-        };
-    
-        await _userService.UpdateUserAsync(user);
+        await _userService.UpdateUserAsync(request);
 
         return Ok(new { message = "User updated successfully" });
     }
