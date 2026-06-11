@@ -13,10 +13,12 @@ const password = ref('')
 const accountError = ref('')
 const passwordError= ref('')
 
+const message = ref('')
+
 const submitAction = () => {
 
-    
-  if (accountError.value.length > 0 || passwordError.value.length > 0) {
+  if (account.value.length == 0 || password.value.length == 0) {
+    message.value = "帳號/密碼不能為空"
     return
   }
 
@@ -60,6 +62,8 @@ const passwordValidate = () => {
       title="密碼" hint="請輸入密碼" type="password" :error-text="passwordError" />
 
     <button class="login_button" @click="submitAction">登入</button>
+
+    <p class="message_text" v-show="message.length > 0">{{ message }}</p>
 
     <div class="bottom_div">
       <RouterLink to="/register" class="link_text">註冊會員</RouterLink> 

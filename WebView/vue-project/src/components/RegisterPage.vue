@@ -22,8 +22,8 @@ const message = ref('')
 
 const submitAction = () => {
 
-    
-  if (accountError.value.length > 0 || nameError.value.length > 0) {
+  if (account.value.length == 0 || name.value.length == 0) {
+    message.value = "帳號/名稱不能為空"
     return
   }
 
