@@ -1,18 +1,19 @@
 import axios from 'axios'
 import type { UserResponse } from '@/models/UserResponse'
 
-let url = 'http://localhost:5231/api/users/';
+const BASR_URL = 'http://localhost:5231/api/';
+const USER_URL = `${BASR_URL}users/`;
 
 export async function getUserById(id: string): Promise<UserResponse> {
 
-  const response = await axios.get(`${url}${id}`)
+  const response = await axios.get(`${USER_URL}${id}`)
 
   return response.data
 }
 
 export async function getAllUsers(): Promise<UserResponse> {
 
-  const response = await axios.get(`${url}all`)
+  const response = await axios.get(`${USER_URL}all`)
 
   return response.data
 }
@@ -44,7 +45,7 @@ export async function addUser(
         request.birthday = birthday
     }
 
-    const response = await axios.post(`${url}add`, request)
+    const response = await axios.post(`${USER_URL}add`, request)
 
     return response.data
 }
