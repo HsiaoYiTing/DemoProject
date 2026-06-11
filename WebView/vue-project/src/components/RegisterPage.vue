@@ -39,16 +39,6 @@ const goBack = () => {
 
 async function addUserApi() {
 
-  // const response = await axios.post('http://localhost:5231/api/users/add',
-  // {
-  //     account: account.value,
-  //     name: name.value,
-  //     age: age.value,
-  //     salary: salary.value,
-  //     enabled: true,
-  //     birthday: birthday.value || ""
-  // })
-
   const response = await addUser(account.value, name.value, age.value, salary.value, birthday.value)
 
   console.log(response)
