@@ -37,7 +37,7 @@ const goBack = () => {
   router.back();
 }
 
-async function addUserApi() {
+const addUserApi = async () => {
 
   const response = await addUser(account.value, name.value, age.value, salary.value, birthday.value)
 

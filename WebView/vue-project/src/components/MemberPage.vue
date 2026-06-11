@@ -33,7 +33,7 @@ const getUserByIdAction = () => {
   getUserByIdApi(user_id.value)
 }
 
-async function getUserByIdApi(id: string) {
+const getUserByIdApi = async (id: string) => {
 
   const apiRes = await getUserById(id)
   if (apiRes.data != null) {
@@ -57,7 +57,7 @@ const getAllUserAction = () => {
   getAllUsersApi()
 }
 
-async function getAllUsersApi() {
+const getAllUsersApi = async () => {
 
   let apiRes = await getAllUsers()
   if (apiRes.data != null) {
