@@ -38,35 +38,6 @@ public class CommandUserRepository: IUserRepository
         return users.ToList();
     }
 
-    // 自己轉物件的方式
-    // public async Task<User?> GetByIdAsync(int id)
-    // {
-    //     using var connection = CreateConnection();
-    //     await connection.OpenAsync();
-
-    //     var command = new NpgsqlCommand("SELECT * FROM demo_user WHERE id = @id", connection);
-    //     command.Parameters.AddWithValue("@id", id);
-
-    //     using var reader = await command.ExecuteReaderAsync();
-    //     if (await reader.ReadAsync())
-    //     {
-    //         return new User
-    //         {
-    //             Id = (int)reader.GetInt64(0),
-    //             Account = reader.GetString(1),
-    //             Name = reader.GetString(2),
-    //             Age = reader.IsDBNull(3) ? 0 : reader.GetInt32(3),
-    //             Salary = reader.GetDecimal(4),
-    //             Enabled = reader.GetBoolean(5),
-    //             Birthday = reader.IsDBNull(6) ? DateOnly.MinValue : reader.GetFieldValue<DateOnly>(6),
-    //             LastLogin = reader.IsDBNull(7) ? DateTime.MinValue : reader.GetDateTime(7),
-    //             CreateTime = reader.GetDateTime(8)
-    //         };
-    //     }
-
-    //     return null;
-    // }
-
     // Dapper 轉物件的方式
     public async Task<User?> GetByIdAsync(int id)
     {
