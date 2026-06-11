@@ -6,16 +6,30 @@ const USER_URL = `${BASR_URL}users/`;
 
 export async function getUserById(id: string): Promise<UserResponse> {
 
-  const response = await axios.get(`${USER_URL}${id}`)
+    try{
 
-  return response.data
+        const response = await axios.get(`${USER_URL}${id}`)
+
+        return response.data
+
+    } catch (error) {
+
+        return parseError(error)
+    }
 }
 
 export async function getAllUsers(): Promise<UserResponse> {
 
-  const response = await axios.get(`${USER_URL}all`)
+    try {
 
-  return response.data
+        const response = await axios.get(`${USER_URL}all`)
+
+        return response.data
+
+    } catch (error) {
+        
+        return parseError(error)
+    }
 }
 
 export async function addUser(
@@ -45,7 +59,49 @@ export async function addUser(
         request.birthday = birthday
     }
 
-    const response = await axios.post(`${USER_URL}add`, request)
+    try {
+        const response = await axios.post(`${USER_URL}add`, request)
+        return response.data
 
-    return response.data
+    } catch (error) {
+
+        console.error(error)
+
+        return parseError(error)
+    }
+}
+
+function parseError(error: unknown): UserResponse {
+
+    if (axios.isAxiosError(error)) {
+
+        console.log("status = " + error.response?.status)
+        console.log("statusText = " + error.response?.statusText)
+        console.log("data = " + error.response?.data)
+
+        var errorMsg = error.response?.statusText ?? ""
+        if (error.code === 'ERR_NETWORK') {
+            errorMsg = 'API 沒開或 Port 錯誤'
+        } else  if (error.code === 'ECONNABORTED') {
+            errorMsg = 'Request Timeout'
+        }
+
+        return {
+            code: error.response?.status ?? 0,
+            message: errorMsg
+        }
+    }
+
+    if (error instanceof Error) {
+        return {
+            code: -999,
+            message: error.message
+        }
+    }
+
+    return {
+        code: -9999,
+        message: 'Unknown Error'
+
+    }       
 }
