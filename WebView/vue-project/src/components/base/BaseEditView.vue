@@ -13,8 +13,8 @@ defineProps<{
 
 <template>
   <div>
-    <p>{{ title }}</p>
-    <input 
+    <p class="title">{{ title }}</p>
+    <input class="editView" 
         v-model="text" 
         :placeholder="hint"
         :type="type"
@@ -27,13 +27,13 @@ defineProps<{
 
 <style scoped>
 
-p {
+.title {
     padding-top: 5px;
     font-size: 1rem;
     font-weight: bold;
 }
 
-input {
+.editView {
     
     width: calc(100% - 10px);
     height: 40px;

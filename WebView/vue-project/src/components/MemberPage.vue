@@ -94,7 +94,7 @@ const logoutAction = () => {
 
     <p class="message_text" v-show="apiError.length > 0">{{ apiError }}</p>
 
-    <table>
+    <table class="user_table">
         <thead>
         <tr class="title_tr">
             <th>ID</th>
@@ -127,17 +127,21 @@ const logoutAction = () => {
 
 <style scoped>
 
-table {
+.user_table {
     width: calc(100% - 10px);
     margin-top: 20px;
 
     border-collapse: collapse;
 }
 
-th, td {
+.user_table th, td {
   border: 1px solid #ccc;
   padding: 5px;
   text-align: center;
+}
+
+.user_table th {
+  color: #fff;
 }
 
 .link_text {
